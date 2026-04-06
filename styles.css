@@ -185,6 +185,12 @@ input[type="number"]:focus {
 }
 .btn-dexcom:hover { background: #2a8b4a; }
 
+.btn-full {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.9rem;
+}
+
 .dexcom-icon {
   color: #55ff88;
   font-size: 0.6rem;
@@ -198,8 +204,14 @@ input[type="number"]:focus {
   display: inline-block;
   flex-shrink: 0;
 }
-.status-dot.connected { background: #55ff88; box-shadow: 0 0 6px #55ff88; }
+.status-dot.connected { background: #55ff88; box-shadow: 0 0 6px #55ff88; animation: pulse-dot 2s infinite; }
 .status-dot.error { background: #ff4455; }
+.status-dot.loading { background: #ffaa33; animation: pulse-dot 0.5s infinite; }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
 
 .status-text {
   font-size: 0.75rem;
@@ -215,6 +227,148 @@ input[type="number"]:focus {
   padding: 10px 14px;
   line-height: 1.5;
   text-align: center;
+}
+
+/* ── Modal ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal {
+  background: #1e1e32;
+  border: 2px solid #4a3526;
+  border-radius: 14px;
+  padding: 28px;
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.modal-close:hover { color: #fff; }
+
+.modal-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.85rem;
+  color: #55ff88;
+  margin-bottom: 10px;
+}
+
+.modal-desc {
+  font-size: 0.8rem;
+  color: #a89880;
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.75rem;
+  color: #c8c0b0;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #3a3a5a;
+  border-radius: 8px;
+  background: #12122a;
+  color: #e0d8c8;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #55ff88;
+  box-shadow: 0 0 8px rgba(85,255,136,0.2);
+}
+
+.form-group input::placeholder {
+  color: #555;
+}
+
+.form-group select {
+  cursor: pointer;
+}
+
+.form-group select option {
+  background: #12122a;
+  color: #e0d8c8;
+}
+
+.form-actions {
+  margin-top: 18px;
+}
+
+.modal-status {
+  margin-top: 12px;
+  font-size: 0.78rem;
+  text-align: center;
+  min-height: 20px;
+  line-height: 1.4;
+}
+.modal-status.success { color: #55ff88; }
+.modal-status.error { color: #ff6666; }
+.modal-status.loading { color: #ffaa33; }
+
+.modal-info {
+  margin-top: 16px;
+  border-top: 1px solid #2a2a4a;
+  padding-top: 12px;
+}
+
+.modal-info details {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.modal-info summary {
+  cursor: pointer;
+  color: #aaa;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.modal-info p {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: wait;
+  transform: none !important;
 }
 
 /* Responsive */

@@ -30,7 +30,7 @@
           <input id="glucoseInput" type="number" step="0.1" min="0" max="30" value="6.2" />
         </div>
         <button id="applyManual" class="btn btn-primary">Uppdatera</button>
-        <button id="mockDexcom" class="btn btn-secondary">Simulera värde</button>
+        <button id="mockDexcom" class="btn btn-secondary">Simulera</button>
       </div>
       <div class="control-row">
         <button id="connectDexcom" class="btn btn-dexcom">
@@ -40,6 +40,46 @@
         <span class="status-text" id="dexcomState">Inte kopplad</span>
       </div>
     </section>
+
+    <!-- Dexcom Login Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <h2 class="modal-title">Koppla Dexcom Share</h2>
+        <p class="modal-desc">Logga in med ditt Dexcom-konto (samma som i Dexcom-appen). Dina uppgifter sparas bara lokalt i din webbläsare.</p>
+
+        <form id="dexcomForm" autocomplete="on">
+          <div class="form-group">
+            <label for="dexUsername">Användarnamn / E-post</label>
+            <input type="text" id="dexUsername" autocomplete="username" placeholder="ditt.namn@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="dexPassword">Lösenord</label>
+            <input type="password" id="dexPassword" autocomplete="current-password" placeholder="Ditt Dexcom-lösenord" required />
+          </div>
+          <div class="form-group">
+            <label for="dexRegion">Region</label>
+            <select id="dexRegion">
+              <option value="eu">Europa (EU)</option>
+              <option value="us">USA</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-dexcom btn-full" id="loginBtn">Logga in & Koppla</button>
+          </div>
+          <p class="modal-status" id="modalStatus"></p>
+        </form>
+
+        <div class="modal-info">
+          <details>
+            <summary>Hur funkar det?</summary>
+            <p>GlukoBuddy använder Dexcom Share för att läsa ditt senaste glukosvärde. Detta är samma system som Dexcom Follower-appen använder.</p>
+            <p><strong>Krav:</strong> Du måste ha "Dela" aktiverat i din Dexcom G7-app.</p>
+            <p><strong>Säkerhet:</strong> Dina uppgifter skickas direkt till Dexcom och sparas bara i din webbläsare (localStorage). Inget sparas på någon server.</p>
+          </details>
+        </div>
+      </div>
+    </div>
 
     <section class="info-bar" id="statusText">
       Ange ett glukosvärde eller koppla Dexcom G7 för att se din valp reagera.
