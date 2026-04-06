@@ -113,7 +113,6 @@ export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isSimulating, setIsSimulating] = useState(false)
   const [dexcomEmail, setDexcomEmail] = useState('')
-  const [dexcomPassword, setDexcomPassword] = useState('')
   const [dexcomConnected, setDexcomConnected] = useState(false)
   const [connectionState, setConnectionState] = useState('Ingen Dexcom G7 ansluten ännu')
   const [dexcomError, setDexcomError] = useState('')
@@ -161,18 +160,19 @@ export default function Home() {
   }
 
   const connectDexcom = () => {
-    if (!dexcomEmail.trim() || !dexcomPassword.trim()) {
-      setDexcomError('Fyll i både e-post och lösenord för Dexcom.')
+    if (!dexcomEmail.trim()) {
+      setDexcomError('Fyll i e-post för Dexcom.')
       return
     }
 
     setDexcomError('')
     setConnectionState('Loggar in mot Dexcom G7...')
 
+    // Simulera lyckad anslutning efter kort tid
     setTimeout(() => {
       setDexcomConnected(true)
       setConnectionState(`Dexcom G7 ansluten som ${dexcomEmail}`)
-    }, 1200)
+    }, 500) // Snabbare
   }
 
   useEffect(() => {
@@ -282,16 +282,6 @@ export default function Home() {
                     onChange={(e) => setDexcomEmail(e.target.value)}
                     className="w-full rounded-3xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none focus:border-cyan-400"
                     placeholder="exempel@mail.com"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs uppercase tracking-[0.3em] text-slate-500 mb-2">Lösenord</label>
-                  <input
-                    type="password"
-                    value={dexcomPassword}
-                    onChange={(e) => setDexcomPassword(e.target.value)}
-                    className="w-full rounded-3xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none focus:border-cyan-400"
-                    placeholder="Dexcom-lösenord"
                   />
                 </div>
                 {dexcomError && <p className="text-sm text-red-400">{dexcomError}</p>}
