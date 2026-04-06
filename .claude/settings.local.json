@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/PC/**)",
+      "Bash(find /e -maxdepth 4 -name \"GlukoBuddybyCursorV2\" -type d)"
+    ]
+  }
+}
