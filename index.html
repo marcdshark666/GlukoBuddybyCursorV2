@@ -3,38 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GlukoBuddy Pixel Garden</title>
+  <title>GlukoBuddy — Din Pixel Chow Chow</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
 </head>
 <body>
   <main class="app">
-    <h1>GlukoBuddy Pixel Garden</h1>
-    <p class="subtitle">Tamagotchi-stil: chow chow som reagerar på glukos (mmol/L)</p>
+    <header class="header">
+      <h1 class="title">GlukoBuddy</h1>
+      <p class="subtitle">Din Tamagotchi Chow Chow</p>
+    </header>
 
-    <section class="controls">
-      <label for="glucoseInput">Glukos (mmol/L)</label>
-      <input id="glucoseInput" type="number" step="0.1" min="0" value="6.2" />
-      <button id="applyManual">Uppdatera</button>
-      <button id="mockDexcom">Simulera Dexcom G7 värde</button>
-      <button id="connectDexcom">Koppla Dexcom Share</button>
-      <p id="statusText"></p>
-      <p id="dexcomState">Dexcom: inte kopplad</p>
+    <section class="garden-frame">
+      <canvas id="gardenCanvas" width="480" height="400"></canvas>
+      <div class="glucose-badge" id="glucoseBadge">
+        <span class="badge-value" id="badgeValue">6.2</span>
+        <span class="badge-unit">mmol/L</span>
+      </div>
+      <div class="mood-label" id="moodLabel">Glad valp!</div>
     </section>
 
-    <section class="garden" id="garden">
-      <div class="sun"></div>
-      <div class="cloud cloud-a"></div>
-      <div class="cloud cloud-b"></div>
-      <div class="grass"></div>
-
-      <div class="pet" id="pet">
-        <div class="dog-sprite" aria-label="Pixel chow chow"></div>
-        <div class="tail" id="tail"></div>
-        <div class="emotion" id="emotion">:D</div>
+    <section class="controls">
+      <div class="control-row">
+        <div class="input-group">
+          <label for="glucoseInput">Glukos (mmol/L)</label>
+          <input id="glucoseInput" type="number" step="0.1" min="0" max="30" value="6.2" />
+        </div>
+        <button id="applyManual" class="btn btn-primary">Uppdatera</button>
+        <button id="mockDexcom" class="btn btn-secondary">Simulera värde</button>
       </div>
+      <div class="control-row">
+        <button id="connectDexcom" class="btn btn-dexcom">
+          <span class="dexcom-icon">●</span> Koppla Dexcom G7
+        </button>
+        <span class="status-dot" id="statusDot"></span>
+        <span class="status-text" id="dexcomState">Inte kopplad</span>
+      </div>
+    </section>
 
-      <div id="leafLayer" class="layer"></div>
-      <div id="butterflyLayer" class="layer"></div>
+    <section class="info-bar" id="statusText">
+      Ange ett glukosvärde eller koppla Dexcom G7 för att se din valp reagera.
     </section>
   </main>
 
