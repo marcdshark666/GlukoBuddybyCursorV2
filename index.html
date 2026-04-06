@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GlukoBuddy Pixel Garden</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <h1>GlukoBuddy Pixel Garden</h1>
+    <p class="subtitle">Tamagotchi-stil: chow chow som reagerar på glukos (mmol/L)</p>
+
+    <section class="controls">
+      <label for="glucoseInput">Glukos (mmol/L)</label>
+      <input id="glucoseInput" type="number" step="0.1" min="0" value="6.2" />
+      <button id="applyManual">Uppdatera</button>
+      <button id="mockDexcom">Simulera Dexcom G7 värde</button>
+      <button id="connectDexcom">Koppla Dexcom Share</button>
+      <p id="statusText"></p>
+      <p id="dexcomState">Dexcom: inte kopplad</p>
+    </section>
+
+    <section class="garden" id="garden">
+      <div class="sun"></div>
+      <div class="cloud cloud-a"></div>
+      <div class="cloud cloud-b"></div>
+      <div class="grass"></div>
+
+      <div class="pet" id="pet">
+        <div class="dog-sprite" aria-label="Pixel chow chow"></div>
+        <div class="tail" id="tail"></div>
+        <div class="emotion" id="emotion">:D</div>
+      </div>
+
+      <div id="leafLayer" class="layer"></div>
+      <div id="butterflyLayer" class="layer"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

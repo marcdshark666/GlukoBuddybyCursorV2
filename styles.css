@@ -1,0 +1,258 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f1e3;
+  color: #2d2d2d;
+}
+
+.app {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+h1 {
+  margin: 0 0 6px;
+}
+
+.subtitle {
+  margin: 0 0 14px;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+input, button {
+  font: inherit;
+  padding: 6px 10px;
+  border: 2px solid #3b2f2f;
+  border-radius: 4px;
+}
+
+button {
+  cursor: pointer;
+  background: #ffdd95;
+}
+
+#statusText {
+  width: 100%;
+  margin: 2px 0 0;
+  font-weight: 600;
+}
+
+#dexcomState {
+  width: 100%;
+  margin: 0;
+  color: #3d2a17;
+  font-size: 0.95rem;
+}
+
+.garden {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  border: 4px solid #3b2f2f;
+  border-radius: 8px;
+  overflow: hidden;
+  image-rendering: pixelated;
+  background: linear-gradient(#9fdbff 0%, #cdeeff 56%, #7ec460 56%, #71b653 100%);
+}
+
+.sun {
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #ffcc33;
+  box-shadow: 0 0 0 8px rgba(255, 204, 51, 0.22);
+}
+
+.cloud {
+  position: absolute;
+  width: 110px;
+  height: 40px;
+  background: #ffffff;
+  border-radius: 50px;
+  opacity: 0.9;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.cloud::before {
+  width: 38px;
+  height: 38px;
+  left: 14px;
+  top: -18px;
+}
+
+.cloud::after {
+  width: 48px;
+  height: 48px;
+  right: 14px;
+  top: -24px;
+}
+
+.cloud-a {
+  left: 40px;
+  top: 32px;
+  animation: drift 22s linear infinite;
+}
+
+.cloud-b {
+  left: 260px;
+  top: 80px;
+  animation: drift 26s linear infinite reverse;
+}
+
+.grass {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 140px;
+  background: repeating-linear-gradient(
+    90deg,
+    #69a74f 0 8px,
+    #74b558 8px 16px
+  );
+}
+
+.pet {
+  position: absolute;
+  left: 50%;
+  bottom: 80px;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 220px;
+  display: grid;
+  place-items: center;
+}
+
+.dog-sprite {
+  width: 176px;
+  height: 176px;
+  image-rendering: pixelated;
+  background:
+    radial-gradient(circle at 50% 62%, #2c2120 0 5px, transparent 6px),
+    radial-gradient(circle at 35% 46%, #241a18 0 4px, transparent 5px),
+    radial-gradient(circle at 65% 46%, #241a18 0 4px, transparent 5px),
+    radial-gradient(circle at 35% 47%, #fff 0 2px, transparent 3px),
+    radial-gradient(circle at 65% 47%, #fff 0 2px, transparent 3px),
+    radial-gradient(circle at 50% 66%, #d8a06f 0 62px, transparent 63px),
+    radial-gradient(circle at 50% 56%, #efc08b 0 50px, transparent 51px),
+    radial-gradient(circle at 27% 19%, #d4925a 0 20px, transparent 21px),
+    radial-gradient(circle at 73% 19%, #d4925a 0 20px, transparent 21px),
+    radial-gradient(circle at 50% 52%, #f4d8b0 0 44px, transparent 45px),
+    radial-gradient(circle at 50% 60%, #f8e8cb 0 30px, transparent 31px);
+  border: 3px solid #4a3526;
+  border-radius: 10px;
+  box-shadow: inset 0 -8px 0 rgba(74, 53, 38, 0.2);
+}
+
+.tail {
+  position: absolute;
+  right: 10px;
+  bottom: 68px;
+  width: 26px;
+  height: 10px;
+  background: #9d6840;
+  border: 2px solid #4a3526;
+  border-radius: 4px;
+  transform-origin: left center;
+}
+
+.tail.wagging {
+  animation: wag 0.35s ease-in-out infinite alternate;
+}
+
+.emotion {
+  position: absolute;
+  left: 14px;
+  top: -6px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #3b2f2f;
+  text-shadow: 1px 1px #fff3d6;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.leaf {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #e59a3d;
+  transform: rotate(45deg);
+  border: 1px solid #7c4a19;
+  opacity: 0.95;
+  animation: fall linear forwards;
+}
+
+.butterfly {
+  position: absolute;
+  width: 18px;
+  height: 10px;
+  animation: flutter 6s linear forwards;
+}
+
+.butterfly::before,
+.butterfly::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #ff79b0;
+  border-radius: 50%;
+  border: 1px solid #7d2d54;
+}
+
+.butterfly::before {
+  left: 0;
+}
+
+.butterfly::after {
+  right: 0;
+}
+
+@keyframes wag {
+  from { transform: rotate(-16deg); }
+  to { transform: rotate(16deg); }
+}
+
+@keyframes drift {
+  from { transform: translateX(-10px); }
+  to { transform: translateX(28px); }
+}
+
+@keyframes fall {
+  from { transform: translateY(-18px) rotate(0deg); }
+  to { transform: translateY(560px) rotate(320deg); }
+}
+
+@keyframes flutter {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(60px, -12px); }
+  50% { transform: translate(130px, 8px); }
+  75% { transform: translate(210px, -14px); }
+  100% { transform: translate(290px, 4px); }
+}
