@@ -168,20 +168,31 @@ connectBtn.addEventListener("click", () => {
   // Check if we have stored credentials
   const stored = localStorage.getItem("glukobuddy_dexcom");
   if (stored) {
-    const creds = JSON.parse(stored);
-    dexUsername.value = creds.username || "";
-    dexRegion.value = creds.region || "eu";
+    try {
+      const creds = JSON.parse(stored);
+      dexUsername.value = creds.username || "";
+      dexRegion.value = creds.region || "eu";
+    } catch {}
   }
   modalOverlay.classList.add("open");
-  dexUsername.focus();
+  document.body.style.overflow = "hidden";
+  setTimeout(() => dexUsername.focus(), 100);
 });
 
-modalClose.addEventListener("click", () => {
+function closeModal() {
   modalOverlay.classList.remove("open");
-});
+  document.body.style.overflow = "";
+}
+
+modalClose.addEventListener("click", closeModal);
 
 modalOverlay.addEventListener("click", (e) => {
-  if (e.target === modalOverlay) modalOverlay.classList.remove("open");
+  // Only close if clicking the dark overlay, not the modal box
+  if (e.target === modalOverlay) closeModal();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && modalOverlay.classList.contains("open")) closeModal();
 });
 
 dexcomForm.addEventListener("submit", async (e) => {
