@@ -112,7 +112,11 @@ export default function Home() {
   const [password, setPassword] = useState('')
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isSimulating, setIsSimulating] = useState(false)
+  const [dexcomEmail, setDexcomEmail] = useState('')
+  const [dexcomPassword, setDexcomPassword] = useState('')
+  const [dexcomConnected, setDexcomConnected] = useState(false)
   const [connectionState, setConnectionState] = useState('Ingen Dexcom G7 ansluten ännu')
+  const [dexcomError, setDexcomError] = useState('')
   const [manualInput, setManualInput] = useState('6.2')
   const tickRef = useRef(0)
 
@@ -157,9 +161,17 @@ export default function Home() {
   }
 
   const connectDexcom = () => {
-    setConnectionState('Förbereder anslutning... bästa sätt är med backend och Dexcom Share/OAuth')
+    if (!dexcomEmail.trim() || !dexcomPassword.trim()) {
+      setDexcomError('Fyll i både e-post och lösenord för Dexcom.')
+      return
+    }
+
+    setDexcomError('')
+    setConnectionState('Loggar in mot Dexcom G7...')
+
     setTimeout(() => {
-      setConnectionState('Mock-anslutning klar. Byt till riktig backend för live-data.')
+      setDexcomConnected(true)
+      setConnectionState(`Dexcom G7 ansluten som ${dexcomEmail}`)
     }, 1200)
   }
 
@@ -260,9 +272,33 @@ export default function Home() {
 
             <div className="rounded-[2rem] border border-slate-700/60 bg-slate-950/90 p-6 shadow-2xl shadow-slate-950/30 backdrop-blur-xl">
               <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Dexcom G7</p>
-              <p className="mt-3 text-slate-300">Koppla Dexcom säkert via backend. Den här appen visar en mock-knapp tills en riktig backend med Share/OAuth är på plats.</p>
-              <button onClick={connectDexcom} className="mt-4 w-full rounded-3xl bg-amber-400 px-4 py-3 text-slate-950 font-semibold transition hover:bg-amber-300">Koppla Dexcom G7</button>
+              <p className="mt-3 text-slate-300">Logga in med Dexcom-e-post och lösenord här. Backend krävs för riktig anslutning, men denna version visar login-fälten direkt.</p>
+              <div className="mt-5 space-y-4">
+                <div>
+                  <label className="block text-xs uppercase tracking-[0.3em] text-slate-500 mb-2">E-post</label>
+                  <input
+                    type="email"
+                    value={dexcomEmail}
+                    onChange={(e) => setDexcomEmail(e.target.value)}
+                    className="w-full rounded-3xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none focus:border-cyan-400"
+                    placeholder="exempel@mail.com"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs uppercase tracking-[0.3em] text-slate-500 mb-2">Lösenord</label>
+                  <input
+                    type="password"
+                    value={dexcomPassword}
+                    onChange={(e) => setDexcomPassword(e.target.value)}
+                    className="w-full rounded-3xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none focus:border-cyan-400"
+                    placeholder="Dexcom-lösenord"
+                  />
+                </div>
+                {dexcomError && <p className="text-sm text-red-400">{dexcomError}</p>}
+                <button onClick={connectDexcom} className="w-full rounded-3xl bg-amber-400 px-4 py-3 text-slate-950 font-semibold transition hover:bg-amber-300">Logga in Dexcom G7</button>
+              </div>
               <p className="mt-3 text-slate-300">{connectionState}</p>
+              {dexcomConnected && <p className="mt-2 text-sm text-emerald-400">Dexcom-inloggning aktiverad.</p>}
             </div>
           </div>
         </section>

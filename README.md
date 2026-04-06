@@ -17,6 +17,7 @@ npm run dev
 - Automatisk uppdatering var 2:e minut efter inloggning
 - Manuell uppdatering och simulerad Dexcom‑värdeknapp
 - Enkel follower-login med lösenordet `follower123`
+- Dexcom-loginfälten för e-post och lösenord finns i appen
 - Mock-Dexcom-knapp med tydlig text om att riktig backend krävs
 
 ## Dexcom G7
